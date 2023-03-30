@@ -1,7 +1,10 @@
-﻿using Prism.Navigation;
+﻿using MobileGame.Views;
+using Prism.Commands;
+using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace MobileGame.ViewModels
 {
@@ -12,5 +15,13 @@ namespace MobileGame.ViewModels
         {
            
         }
+
+        private ICommand navigateToPlayCommand;
+        public ICommand NavigateToPlayCommand
+        {
+            get => navigateToPlayCommand ??= new DelegateCommand(()=> 
+            NavigationService.NavigateAsync(nameof(PlayPageView)));
+        }
+
     }
 }

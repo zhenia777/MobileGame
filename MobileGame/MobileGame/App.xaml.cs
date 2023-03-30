@@ -8,12 +8,12 @@ using Xamarin.Forms.Xaml;
 
 namespace MobileGame
 {
-    public partial class App 
+    public partial class App
     {
         public App(IPlatformInitializer initializer)
-            :base(initializer)
+            : base(initializer)
         {
-            
+
 
             //MainPage = new MainPage();
         }
@@ -21,11 +21,13 @@ namespace MobileGame
         protected override void OnInitialized()
         {
             InitializeComponent();
+            //NavigationService.NavigateAsync(nameof(MainPageView));
             NavigationService.NavigateAsync(nameof(PlayPageView));
         }
 
         protected override void RegisterTypes(IContainerRegistry conteinerRegistry)
         {
+            conteinerRegistry.RegisterForNavigation<MainPageView, MainPageViewModel>();
             conteinerRegistry.RegisterForNavigation<PlayPageView, PlayPageViewModel>();
         }
 
