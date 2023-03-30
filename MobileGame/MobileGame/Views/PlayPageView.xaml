@@ -6,16 +6,32 @@
              x:Class="MobileGame.Views.PlayPageView"
              BackgroundImageSource="PlayField.jpg">
     <ContentPage.Content>
-        <StackLayout>
+        <Grid
+            RowDefinitions="*,*"
+            ColumnDefinitions="*,*">
+
             <Image
-                
                 TranslationX="{Binding X}"
                 TranslationY="{Binding Y}"
                 Source="MainCar2.png"
+                Grid.Column="1"
+                Grid.Row="1"
+                />
+            <Image
+                Source="WhiteCar.png"
                 VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Grid.Column="0"
+                Grid.Row="0"
                 
                 />
-            
-        </StackLayout>
+            <Image
+                Source="WhiteCar.png"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                Grid.Column="1"
+                Grid.Row="0"
+                />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

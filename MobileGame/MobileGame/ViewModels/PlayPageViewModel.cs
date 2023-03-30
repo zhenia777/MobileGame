@@ -19,7 +19,6 @@ namespace MobileGame.ViewModels
             Accelerometer.Start(SensorSpeed.Game);
         }
 
-       
 
         private double x;
         public double X
