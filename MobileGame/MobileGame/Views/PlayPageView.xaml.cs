@@ -9,7 +9,6 @@ using Xamarin.Forms.Xaml;
 
 namespace MobileGame.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PlayPageView : ContentPage
 	{
 		public PlayPageView ()

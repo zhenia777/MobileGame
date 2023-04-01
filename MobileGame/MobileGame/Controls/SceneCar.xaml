@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileGame.Controls.SceneCar">
+  <ContentView.Content>
+        <Grid
+            RowDefinitions="*,*"
+            ColumnDefinitions="*,*">
+
+            <Image x:Name="userCar"
+                Source="MainCar2.png"
+                Grid.Column="1"
+                Grid.Row="1"
+                />
+            <Image x:Name="evilCar1"
+                Source="WhiteCar.png"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Grid.Column="0"
+                Grid.Row="0"
+                
+                />
+            <Image x:Name="evilCar2"
+                Source="WhiteCar.png"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                Grid.Column="1"
+                Grid.Row="0"
+                />
+        </Grid>
+  </ContentView.Content>
+</ContentView>
