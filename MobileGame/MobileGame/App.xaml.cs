@@ -3,6 +3,7 @@ using MobileGame.Views;
 using Prism;
 using Prism.Ioc;
 using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,6 +22,7 @@ namespace MobileGame
         protected override void OnInitialized()
         {
             InitializeComponent();
+            DeviceDisplay.KeepScreenOn = true;
             //NavigationService.NavigateAsync(nameof(MainPageView));
             NavigationService.NavigateAsync(nameof(PlayPageView));
         }
