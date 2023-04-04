@@ -20,6 +20,12 @@ namespace MobileGame.Controls
 
         private double npcCarSpeedY = 2;
 
+        private readonly double S; 
+        private readonly double V; 
+        private readonly uint T;
+
+        private readonly Random random;
+
         public SceneCar ()
 		{
 			InitializeComponent ();
@@ -29,11 +35,29 @@ namespace MobileGame.Controls
             };
             Accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
 
-            Device.StartTimer(TimeSpan.FromMilliseconds(33), NPCMove);
+            S = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density;
+            T = 5000;
+            V = S / T;
+
+            random = new Random();
+
+            //elements.First().TranslateTo(0, S, T - 500);
+            Device.StartTimer(TimeSpan.FromMilliseconds(T), AnimationNPCMove);
+            //Device.StartTimer(TimeSpan.FromMilliseconds(33), NPCMove);
 
         }
 
 
+        private bool AnimationNPCMove()
+        {
+
+            var car = elements[random.Next(0, elements.Count)];
+
+            car.TranslationY = -200;
+            car.TranslateTo(car.TranslationX, S, T-500);
+
+            return IsGameContinue;
+        }
         private bool NPCMove()
         {
 
