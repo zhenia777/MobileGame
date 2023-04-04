@@ -25,6 +25,7 @@ namespace MobileGame.Controls
         private readonly uint T;
 
         private readonly Random random;
+        private VisualElement activeEvilCar;
 
         public SceneCar ()
 		{
@@ -51,10 +52,10 @@ namespace MobileGame.Controls
         private bool AnimationNPCMove()
         {
 
-            var car = elements[random.Next(0, elements.Count)];
+            activeEvilCar = elements[random.Next(0, elements.Count)];
 
-            car.TranslationY = -200;
-            car.TranslateTo(car.TranslationX, S, T-500);
+            activeEvilCar.TranslationY = -200;
+            activeEvilCar.TranslateTo(activeEvilCar.TranslationX, S, T-500);
 
             return IsGameContinue;
         }
