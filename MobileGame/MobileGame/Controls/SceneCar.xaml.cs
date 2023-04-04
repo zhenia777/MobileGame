@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobileGame.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace MobileGame.Controls
         private double userCarSpeedX = 6;
         private double userCarSpeedY = 8;
 
-        private double npcCarSpeedY = 2;
+        //private double npcCarSpeedY = 2;
 
         private readonly double S; 
         private readonly double V; 
@@ -59,37 +60,27 @@ namespace MobileGame.Controls
 
             return IsGameContinue;
         }
-        private bool NPCMove()
-        {
+        //private bool NPCMove()
+        //{
 
-            elements.ForEach(car => car.TranslationY +=npcCarSpeedY);
+        //    elements.ForEach(car => car.TranslationY +=npcCarSpeedY);
             
-            elements.Where(car => car.TranslationY > DeviceDisplay.MainDisplayInfo.Height/DeviceDisplay.MainDisplayInfo.Density).ForEach(car=> car.TranslationY =-car.Height );
-            Debug.WriteLine($"{elements[0].TranslationY} {DeviceDisplay.MainDisplayInfo.Height/ DeviceDisplay.MainDisplayInfo.Density}");
-            return IsGameContinue;
-        }
+        //    elements.Where(car => car.TranslationY > DeviceDisplay.MainDisplayInfo.Height/DeviceDisplay.MainDisplayInfo.Density).ForEach(car=> car.TranslationY =-car.Height );
+        //    Debug.WriteLine($"{elements[0].TranslationY} {DeviceDisplay.MainDisplayInfo.Height/ DeviceDisplay.MainDisplayInfo.Density}");
+        //    return IsGameContinue;
+        //}
 
 
         
         private void Accelerometer_ReadingChanged(object sender, AccelerometerChangedEventArgs e)
         {
+            if( userCar is null || activeEvilCar is null )
+            {
+                return;
+            }
 
-            var rect = new Rectangle(new Point(userCar.X + userCar.TranslationX, userCar.Y + userCar.TranslationY), userCar.Bounds.Size);
 
-            VisualElement res = null;// elements.FirstOrDefault(x => x.Bounds.IntersectsWith(userCar.Bounds));
-
-
-            //foreach (var item in elements)
-            //{
-            //    if (item.Bounds.IntersectsWith(rect))
-            //    {
-            //        Debug.WriteLine($"x:{rect.X:0.000} Y:{rect.Y:0.000}");
-
-            //        //Console.WriteLine();
-            //    }
-            //}
-            //Debug.WriteLine($"x:{userCar.X:0.000} Y:{userCar.Y:0.000}");
-            if (res != null)
+            if (IntersectsChecker.Check(userCar, activeEvilCar))
             {
                 if (IntersectsCommand?.CanExecute(null) ?? false)
                 {

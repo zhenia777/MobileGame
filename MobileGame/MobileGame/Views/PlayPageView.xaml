@@ -7,6 +7,12 @@
              x:Class="MobileGame.Views.PlayPageView"
              BackgroundImageSource="PlayField.jpg">
     <ContentPage.Content>
-        <controls:SceneCar IntersectsCommand="{Binding IntersectsCommand}"/>
+        <Grid>
+            <controls:SceneCar IntersectsCommand="{Binding IntersectsCommand}"/>
+            <Label FontSize="30"
+                   HorizontalOptions="Center"
+                   VerticalOptions="End"
+                   Text="{Binding Title}"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

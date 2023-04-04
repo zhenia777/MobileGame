@@ -31,6 +31,8 @@ namespace MobileGame
         {
             conteinerRegistry.RegisterForNavigation<MainPageView, MainPageViewModel>();
             conteinerRegistry.RegisterForNavigation<PlayPageView, PlayPageViewModel>();
+
+
         }
 
     }

@@ -15,9 +15,8 @@ namespace MobileGame.ViewModels
         public PlayPageViewModel(INavigationService navigationService)
            : base(navigationService)
         {
-
+            Title = "...";
         }
-
 
         private double x;
         public double X
@@ -35,7 +34,7 @@ namespace MobileGame.ViewModels
         private ICommand intersectsCommand;
         public ICommand IntersectsCommand
         {
-            get => intersectsCommand ??= new DelegateCommand(() => Debug.WriteLine("Yes!!"));
+            get => intersectsCommand ??= new DelegateCommand(() => Title = "Yes");
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
