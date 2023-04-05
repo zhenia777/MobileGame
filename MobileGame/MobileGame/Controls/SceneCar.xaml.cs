@@ -20,10 +20,10 @@ namespace MobileGame.Controls
         private double userCarSpeedY = 8;
 
         //private double npcCarSpeedY = 2;
-
-        private readonly double S; 
-        private readonly double V; 
+        private readonly double S;
+        private readonly double V;
         private readonly uint T;
+        private uint score;
 
         private readonly Random random;
         private VisualElement activeEvilCar;
@@ -38,7 +38,7 @@ namespace MobileGame.Controls
             Accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
 
             S = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density;
-            T = 5000;
+            T = 3000;
             V = S / T;
 
             random = new Random();
@@ -55,9 +55,10 @@ namespace MobileGame.Controls
 
             activeEvilCar = elements[random.Next(0, elements.Count)];
 
-            activeEvilCar.TranslationY = -200;
+            activeEvilCar.TranslationY = -500;
+            activeEvilCar.TranslationX = random.Next(-30, 30);
             activeEvilCar.TranslateTo(activeEvilCar.TranslationX, S, T-500);
-
+            Score += 10;
             return IsGameContinue;
         }
         //private bool NPCMove()
@@ -92,7 +93,16 @@ namespace MobileGame.Controls
             //TODO: Додати властивості чутливості сенсору
 
         }
-
+        public string Score
+        {
+            get => (string)GetValue(ScoreProperty);
+            set => SetValue(ScoreProperty, value);
+        }
+        public static readonly BindableProperty ScoreProperty = BindableProperty.Create(
+           nameof(Score),
+           typeof(string),
+           typeof(SceneCar),
+           defaultValue: "");
         public ICommand IntersectsCommand
         {
             get => (ICommand)GetValue(IntersectsCommandProperty);

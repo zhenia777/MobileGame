@@ -8,11 +8,15 @@
              BackgroundImageSource="PlayField.jpg">
     <ContentPage.Content>
         <Grid>
-            <controls:SceneCar IntersectsCommand="{Binding IntersectsCommand}"/>
-            <Label FontSize="30"
-                   HorizontalOptions="Center"
-                   VerticalOptions="End"
-                   Text="{Binding Title}"/>
+            <controls:SceneCar 
+                               Score="{Binding Score}"/>
+            
+            <Label
+               FontSize="30"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                Text="{Binding Score}"
+                />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

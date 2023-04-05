@@ -15,7 +15,15 @@ namespace MobileGame.ViewModels
         public PlayPageViewModel(INavigationService navigationService)
            : base(navigationService)
         {
-            Title = "...";
+            //Title = "...";
+            
+        }
+
+        private string score;
+        public string Score
+        {
+            get => score;
+            set => SetProperty(ref score, value);
         }
 
         private double x;
@@ -31,12 +39,17 @@ namespace MobileGame.ViewModels
             get => y;
             set => SetProperty(ref y, value);
         }
-        private ICommand intersectsCommand;
-        public ICommand IntersectsCommand
-        {
-            get => intersectsCommand ??= new DelegateCommand(() => Title = "Yes");
-        }
+        //private ICommand intersectsCommand;
+        //public ICommand IntersectsCommand
+        //{
+        //    get => intersectsCommand ??= new DelegateCommand(() => Title = "Yes");
+        //}
 
+        
+        private void PlusScore()
+        {
+            Score = $"{Score}";
+        }
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             Accelerometer.Start(SensorSpeed.Game); ;
@@ -45,6 +58,5 @@ namespace MobileGame.ViewModels
         {
             Accelerometer.Stop();
         }
-
     }
 }
