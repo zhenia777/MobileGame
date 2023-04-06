@@ -1,8 +1,10 @@
-﻿using Prism.Commands;
+﻿using MobileGame.Models;
+using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -12,6 +14,7 @@ namespace MobileGame.ViewModels
 {
     internal class PlayPageViewModel : ViewModelBase
     {
+
         public PlayPageViewModel(INavigationService navigationService)
            : base(navigationService)
         {
@@ -19,36 +22,40 @@ namespace MobileGame.ViewModels
             
         }
 
-        private string score;
-        public string Score
+        private List<LifeModel> lifeCollection;
+        public List<LifeModel> LifeCollection
+        {
+            get => lifeCollection;
+            set => SetProperty(ref lifeCollection, value);
+        }
+        private int score;
+        public int Score
         {
             get => score;
             set => SetProperty(ref score, value);
         }
-
-        private double x;
-        public double X
+        private bool isGameContinue = true;
+        public bool IsGameContinue
         {
-            get => x;
-            set => SetProperty(ref x, value);
+            get => isGameContinue;
+            set => SetProperty(ref isGameContinue, value);
         }
 
-        private double y;
-        public double Y
+        private ICommand intersectsCommand;
+        public ICommand IntersectsCommand
         {
-            get => y;
-            set => SetProperty(ref y, value);
+            get => intersectsCommand ??= new DelegateCommand(() => IsGameContinue = false);
         }
-        //private ICommand intersectsCommand;
-        //public ICommand IntersectsCommand
-        //{
-        //    get => intersectsCommand ??= new DelegateCommand(() => Title = "Yes");
-        //}
 
-        
-        private void PlusScore()
+        public override void Initialize(INavigationParameters parameters)
         {
-            Score = $"{Score}";
+            base.Initialize(parameters);
+            LifeCollection = new List<LifeModel> 
+            {
+                new() { ImageSource = ImageSource.FromFile("LIFE.png") },
+                new() { ImageSource = ImageSource.FromFile("LIFE.png") },
+                new() { ImageSource = ImageSource.FromFile("LIFE.png") },
+            };
         }
         public override void OnNavigatedTo(INavigationParameters parameters)
         {

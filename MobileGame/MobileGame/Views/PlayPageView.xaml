@@ -3,34 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:MobileGame.ViewModels" 
              xmlns:controls="clr-namespace:MobileGame.Controls"
-             x:DataType="viewmodels:PlayPageViewModel"
+            
              x:Class="MobileGame.Views.PlayPageView"
              BackgroundImageSource="PlayField.jpg">
     <ContentPage.Content>
         <Grid>
-            <controls:SceneCar Score="{Binding Score}"/>
+            <controls:SceneCar Score="{Binding Score}"
+                               IsGameContinue="{Binding IsGameContinue}"
+                               IntersectsCommand="{Binding IntersectsCommand}"/>
             
-            <Label
-                FontSize="30"
-                TextColor="White"
-                FontAttributes="Bold"
-                HorizontalOptions="End"
-                VerticalOptions="Start"
-                Text="Score"
-                />
             <Label
                 FontSize="30"
                 TextColor="White"
                 FontAttributes="Bold"
                 HorizontalOptions="Start"
                 VerticalOptions="Start"
-                Text="Time"
-                />
-            <Image
+                Text="Time"/>
+            <!--<Label
+                FontSize="30"
+                TextColor="White"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                Text=""
+                />-->
+            <Label
+                FontSize="30"
+                TextColor="White"
+                FontAttributes="Bold"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                Text="{Binding Score}"/>
+                
+            <!--<Image
                 Source="LIFE.png"
                 HorizontalOptions="Center"
-                VerticalOptions="Start"/>
-
+                VerticalOptions="Start"/>-->
+            
+            <CollectionView ItemsSource="{Binding LifeCollection}"
+                            >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Image Source="{Binding ImageSource}"/>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

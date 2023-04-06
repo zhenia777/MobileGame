@@ -23,7 +23,7 @@ namespace MobileGame.Controls
         private readonly double S;
         private readonly double V;
         private readonly uint T;
-        private uint score;
+        private int score = 0;
 
         private readonly Random random;
         private VisualElement activeEvilCar;
@@ -58,7 +58,7 @@ namespace MobileGame.Controls
             activeEvilCar.TranslationY = -500;
             activeEvilCar.TranslationX = random.Next(-30, 30);
             activeEvilCar.TranslateTo(activeEvilCar.TranslationX, S, T-500);
-            Score += 10;
+            Score = (score +=10);
             return IsGameContinue;
         }
         //private bool NPCMove()
@@ -85,6 +85,14 @@ namespace MobileGame.Controls
             {
                 if (IntersectsCommand?.CanExecute(null) ?? false)
                 {
+                    double t_X = activeEvilCar.TranslationX;
+                    double t_Y = activeEvilCar.TranslationY;
+
+                    activeEvilCar.CancelAnimations();
+
+                    activeEvilCar.TranslationX = t_X;
+                    activeEvilCar.TranslationY = t_Y;
+
                     IntersectsCommand.Execute(null);
                 }
             }
@@ -93,16 +101,17 @@ namespace MobileGame.Controls
             //TODO: Додати властивості чутливості сенсору
 
         }
-        public string Score
+        public int Score
         {
-            get => (string)GetValue(ScoreProperty);
+            get => (int)GetValue(ScoreProperty);
             set => SetValue(ScoreProperty, value);
         }
         public static readonly BindableProperty ScoreProperty = BindableProperty.Create(
            nameof(Score),
-           typeof(string),
+           typeof(int),
            typeof(SceneCar),
-           defaultValue: "");
+           defaultBindingMode: BindingMode.TwoWay,
+           defaultValue: default);
         public ICommand IntersectsCommand
         {
             get => (ICommand)GetValue(IntersectsCommandProperty);
@@ -122,6 +131,7 @@ namespace MobileGame.Controls
             nameof(IsGameContinue),
             typeof(bool),
             typeof(SceneCar),
+            defaultBindingMode: BindingMode.TwoWay,
             defaultValue: true);
 
         private void UserCarMove(double acX, double acY)
