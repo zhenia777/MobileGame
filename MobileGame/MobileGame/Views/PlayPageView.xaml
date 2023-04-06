@@ -8,15 +8,29 @@
              BackgroundImageSource="PlayField.jpg">
     <ContentPage.Content>
         <Grid>
-            <controls:SceneCar 
-                               Score="{Binding Score}"/>
+            <controls:SceneCar Score="{Binding Score}"/>
             
             <Label
-               FontSize="30"
+                FontSize="30"
+                TextColor="White"
+                FontAttributes="Bold"
                 HorizontalOptions="End"
                 VerticalOptions="Start"
-                Text="{Binding Score}"
+                Text="Score"
                 />
+            <Label
+                FontSize="30"
+                TextColor="White"
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                Text="Time"
+                />
+            <Image
+                Source="LIFE.png"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"/>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
