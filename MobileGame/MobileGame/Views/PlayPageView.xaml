@@ -40,9 +40,8 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Start"/>-->
             
-            <CollectionView ItemsSource="{Binding LifeCollection}"
-                            >
-                <CollectionView.ItemTemplate>
+            <ListView ItemsSource="{Binding LifeCollection}">
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
@@ -50,8 +49,8 @@
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                </ListView.ItemTemplate>
+            </ListView>
             
         </Grid>
     </ContentPage.Content>
