@@ -1,9 +1,11 @@
 ﻿using MobileGame.Models;
+using MobileGame.Views;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Input;
@@ -18,7 +20,6 @@ namespace MobileGame.ViewModels
            : base(navigationService)
         {
             //Title = "...";
-            Timer();
         }
 
         private List<LifeModel> lifeCollection;
@@ -28,7 +29,7 @@ namespace MobileGame.ViewModels
             set => SetProperty(ref lifeCollection, value);
         }
 
-        private int life = 3;
+        private int life;
         public int Life
         {
             get => life;
@@ -45,13 +46,31 @@ namespace MobileGame.ViewModels
         public bool IsGameContinue
         {
             get => isGameContinue;
-            set => SetProperty(ref isGameContinue, value);
+            set => SetProperty(ref isGameContinue, value, 
+                ()=> NavigationService.NavigateAsync(nameof(PlayResultPageView)) );
         }
+
+
 
         private ICommand intersectsCommand;
         public ICommand IntersectsCommand
         {
-            get => intersectsCommand ??= new DelegateCommand(() => IsGameContinue = false);
+            get => intersectsCommand ??= new DelegateCommand(() => {
+
+                if (LifeCollection.Count > 1)
+                {
+                    LifeCollection.Remove(LifeCollection.Last());
+                    LifeCollection = new(LifeCollection);
+                    return;
+                }
+                if(LifeCollection.Count == 1)
+                {
+                    LifeCollection.Remove(LifeCollection.Last());
+                    LifeCollection = new(LifeCollection);
+                }
+
+                IsGameContinue = false;
+            });
         }
 
         int seconds = 0;
@@ -59,12 +78,17 @@ namespace MobileGame.ViewModels
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
-            Device.StartTimer(TimeSpan.FromSeconds(1), () => { seconds++; return true; });
-            if (seconds > 60)
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                minutes += 1;
-                seconds = 0;
-            }
+                seconds++; 
+                if (seconds > 60)
+                {
+                    minutes += 1;
+                    seconds = 0;
+                }
+                Timer();
+                return IsGameContinue;
+            });
             
             //Time = $"{minutes}" + ":" + $"{seconds}";
 
@@ -74,6 +98,9 @@ namespace MobileGame.ViewModels
                 new() { ImageSource = ImageSource.FromFile("LIFE.png") },
                 new() { ImageSource = ImageSource.FromFile("LIFE.png") },
             };
+
+            Life = LifeCollection.Count;
+
         }
         private string time;
         public string Time
@@ -93,6 +120,9 @@ namespace MobileGame.ViewModels
         public override void OnNavigatedFrom(INavigationParameters parameters)
         {
             Accelerometer.Stop();
+
+            parameters.Add(nameof(PlayResultModel), 
+                new PlayResultModel { Minutes = minutes, Seconds = seconds, Score = score});
         }
     }
 }

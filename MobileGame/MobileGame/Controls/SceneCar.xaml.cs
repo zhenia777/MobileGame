@@ -25,7 +25,9 @@ namespace MobileGame.Controls
         private readonly double V;
         private readonly uint T;
         private int score = 0;
-        
+        private bool isIntersect = false;
+        private int outStep = -500;
+
 
         private readonly Random random;
         private VisualElement activeEvilCar;
@@ -54,12 +56,16 @@ namespace MobileGame.Controls
 
         private bool AnimationNPCMove()
         {
-
+            if (!IsGameContinue)
+            {
+                return false;
+            }
+            isIntersect = false;
             activeEvilCar = elements[random.Next(0, elements.Count)];
 
-            activeEvilCar.TranslationY = -500;
+            activeEvilCar.TranslationY = outStep;
             activeEvilCar.TranslationX = random.Next(-30, 30);
-            activeEvilCar.TranslateTo(activeEvilCar.TranslationX, S, T-500);
+            activeEvilCar.TranslateTo(activeEvilCar.TranslationX, S, (uint)(T-outStep));
             Score = (score +=10);
             
             return IsGameContinue;
@@ -68,14 +74,13 @@ namespace MobileGame.Controls
         //{
 
         //    elements.ForEach(car => car.TranslationY +=npcCarSpeedY);
-            
+
         //    elements.Where(car => car.TranslationY > DeviceDisplay.MainDisplayInfo.Height/DeviceDisplay.MainDisplayInfo.Density).ForEach(car=> car.TranslationY =-car.Height );
         //    Debug.WriteLine($"{elements[0].TranslationY} {DeviceDisplay.MainDisplayInfo.Height/ DeviceDisplay.MainDisplayInfo.Density}");
         //    return IsGameContinue;
         //}
 
 
-        
         private void Accelerometer_ReadingChanged(object sender, AccelerometerChangedEventArgs e)
         {
             if( userCar is null || activeEvilCar is null )
@@ -84,19 +89,29 @@ namespace MobileGame.Controls
             }
 
 
-            if (IntersectsChecker.Check(userCar, activeEvilCar))
+            if (IntersectsChecker.Check(userCar, activeEvilCar) && !isIntersect)
             {
-                if (IntersectsCommand?.CanExecute(null) ?? false)
+                isIntersect = true;
+
+                if (IntersectsCommand?.CanExecute(null) ?? false )
                 {
                     double t_X = activeEvilCar.TranslationX;
                     double t_Y = activeEvilCar.TranslationY;
+                    
+                    IntersectsCommand.Execute(null);
 
                     activeEvilCar.CancelAnimations();
 
-                    activeEvilCar.TranslationX = t_X;
-                    activeEvilCar.TranslationY = t_Y;
-
-                    IntersectsCommand.Execute(null);
+                    if (LifeCount == 1)
+                    {
+                        activeEvilCar.TranslationX = t_X;
+                        activeEvilCar.TranslationY = t_Y;
+                    }
+                    else
+                    {
+                        activeEvilCar.TranslationX = outStep;
+                        activeEvilCar.TranslationY = outStep;
+                    }
                 }
             }
 
@@ -114,6 +129,18 @@ namespace MobileGame.Controls
         }
         public static readonly BindableProperty ScoreProperty = BindableProperty.Create(
            nameof(Score),
+           typeof(int),
+           typeof(SceneCar),
+           defaultBindingMode: BindingMode.TwoWay,
+           defaultValue: default);
+
+        public int LifeCount
+        {
+            get => (int)GetValue(LifeCountProperty);
+            set => SetValue(LifeCountProperty, value);
+        }
+        public static readonly BindableProperty LifeCountProperty = BindableProperty.Create(
+           nameof(LifeCount),
            typeof(int),
            typeof(SceneCar),
            defaultBindingMode: BindingMode.TwoWay,

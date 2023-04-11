@@ -11,7 +11,7 @@
             <controls:SceneCar Score="{Binding Score}"
                                IsGameContinue="{Binding IsGameContinue}"
                                IntersectsCommand="{Binding IntersectsCommand}"
-                              />
+                               LifeCount="{Binding Life}"/>
 
             <Label
                 FontSize="30"

@@ -3,43 +3,52 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileGame.Views.PlayResultPageView">
     <ContentPage.Content>
-        <Grid
+        <Grid RowDefinitions="*,*,*,*,*,*,*"
             BackgroundColor="#59CE8F">
             <Label
                FontSize="60"
                 TextColor="#FF1E00"
                 FontAttributes="Bold"
-                Text="GAME OVER!"/>
+                Text="GAME OVER!"
+                HorizontalOptions="Center"
+                Grid.Row="0"/>
             <Label
                 FontSize="40"
                 TextColor="#000000"
                 FontAttributes="Bold"
-                Text="Your car is crashed((("/>
+                Text="Your car is crashed((("
+                Grid.Row="1"/>
             <Label
                 FontSize="30"
                 TextColor="White"
                 FontAttributes="Bold"
-                Text="Score:" />
+                Text="Score:" 
+                Grid.Row="2"/>
              <Label
                 FontSize="20"
                 TextColor="White"
                 FontAttributes="Bold"
-                Text="Best score:" 
+                Text="Best score:"
+                 Grid.Row="3"
                 />
             <Label
                 FontSize="30"
                 TextColor="White"
                 FontAttributes="Bold"
                 Text="Time:"
+                Grid.Row="4"
                />
             <Button
                 FontSize="30"
                 Text="Menu"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                Grid.Row="5"/>
             <Button
                 FontSize="30"
                 Text="Replay!"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Grid.Row="6"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
