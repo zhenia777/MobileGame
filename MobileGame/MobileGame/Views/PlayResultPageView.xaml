@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileGame.Views.PlayResultPageView">
+    <ContentPage.Content>
+        <Grid
+            BackgroundColor="#59CE8F">
+            <Label
+               FontSize="60"
+                TextColor="#FF1E00"
+                FontAttributes="Bold"
+                Text="GAME OVER!"/>
+            <Label
+                FontSize="40"
+                TextColor="#000000"
+                FontAttributes="Bold"
+                Text="Your car is crashed((("/>
+            <Label
+                FontSize="30"
+                TextColor="White"
+                FontAttributes="Bold"
+                Text="Score:" />
+             <Label
+                FontSize="20"
+                TextColor="White"
+                FontAttributes="Bold"
+                Text="Best score:" 
+                />
+            <Label
+                FontSize="30"
+                TextColor="White"
+                FontAttributes="Bold"
+                Text="Time:"
+               />
+            <Button
+                FontSize="30"
+                Text="Menu"
+                HorizontalOptions="Center"/>
+            <Button
+                FontSize="30"
+                Text="Replay!"
+                HorizontalOptions="Center"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

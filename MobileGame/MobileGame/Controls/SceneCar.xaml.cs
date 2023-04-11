@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -24,6 +25,7 @@ namespace MobileGame.Controls
         private readonly double V;
         private readonly uint T;
         private int score = 0;
+        
 
         private readonly Random random;
         private VisualElement activeEvilCar;
@@ -59,6 +61,7 @@ namespace MobileGame.Controls
             activeEvilCar.TranslationX = random.Next(-30, 30);
             activeEvilCar.TranslateTo(activeEvilCar.TranslationX, S, T-500);
             Score = (score +=10);
+            
             return IsGameContinue;
         }
         //private bool NPCMove()
@@ -101,6 +104,9 @@ namespace MobileGame.Controls
             //TODO: Додати властивості чутливості сенсору
 
         }
+        
+       
+
         public int Score
         {
             get => (int)GetValue(ScoreProperty);
@@ -112,6 +118,7 @@ namespace MobileGame.Controls
            typeof(SceneCar),
            defaultBindingMode: BindingMode.TwoWay,
            defaultValue: default);
+
         public ICommand IntersectsCommand
         {
             get => (ICommand)GetValue(IntersectsCommandProperty);

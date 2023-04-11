@@ -3,22 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:MobileGame.ViewModels" 
              xmlns:controls="clr-namespace:MobileGame.Controls"
-            
+           
              x:Class="MobileGame.Views.PlayPageView"
              BackgroundImageSource="PlayField.jpg">
     <ContentPage.Content>
         <Grid>
             <controls:SceneCar Score="{Binding Score}"
                                IsGameContinue="{Binding IsGameContinue}"
-                               IntersectsCommand="{Binding IntersectsCommand}"/>
-            
+                               IntersectsCommand="{Binding IntersectsCommand}"
+                              />
+
             <Label
                 FontSize="30"
-                TextColor="White"
+                TextColor="#850000"
                 FontAttributes="Bold"
                 HorizontalOptions="Start"
                 VerticalOptions="Start"
-                Text="Time"/>
+                Text="{Binding Time}"/>
             <!--<Label
                 FontSize="30"
                 TextColor="White"
@@ -29,23 +30,25 @@
                 />-->
             <Label
                 FontSize="30"
-                TextColor="White"
+                TextColor="#850000"
                 FontAttributes="Bold"
-                HorizontalOptions="End"
+                HorizontalOptions="Center"
                 VerticalOptions="Start"
                 Text="{Binding Score}"/>
-                
+
             <!--<Image
                 Source="LIFE.png"
                 HorizontalOptions="Center"
                 VerticalOptions="Start"/>-->
-            
+
             <ListView ItemsSource="{Binding LifeCollection}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
-                                <Image Source="{Binding ImageSource}"/>
+                                <Image Source="{Binding ImageSource}" 
+                                       HorizontalOptions="End"
+                                       VerticalOptions="End"/>
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
