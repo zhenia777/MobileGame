@@ -124,5 +124,6 @@ namespace MobileGame.ViewModels
             parameters.Add(nameof(PlayResultModel), 
                 new PlayResultModel { Minutes = minutes, Seconds = seconds, Score = score});
         }
+
     }
 }

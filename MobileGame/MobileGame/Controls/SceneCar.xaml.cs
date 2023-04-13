@@ -17,7 +17,7 @@ namespace MobileGame.Controls
 	public partial class SceneCar : ContentView
 	{
         private List<VisualElement> elements;
-        private double userCarSpeedX = 6;
+        private double userCarSpeedX = 8;
         private double userCarSpeedY = 8;
 
         //private double npcCarSpeedY = 2;
@@ -27,6 +27,7 @@ namespace MobileGame.Controls
         private int score = 0;
         private bool isIntersect = false;
         private int outStep = -500;
+        
 
 
         private readonly Random random;
@@ -34,13 +35,15 @@ namespace MobileGame.Controls
 
         public SceneCar ()
 		{
+
+            //activeEvilCar.TranslationY -= 500;
+            
 			InitializeComponent ();
             elements = new List<VisualElement>
             {
                 evilCar1, evilCar2
             };
             Accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
-
             S = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density;
             T = 3000;
             V = S / T;

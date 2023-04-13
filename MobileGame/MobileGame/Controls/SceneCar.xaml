@@ -9,15 +9,18 @@
 
             <Image x:Name="userCar"
                 Source="MainCar2.png"
+                VerticalOptions="End"
+                HorizontalOptions="End"
                 Grid.Column="1"
                 Grid.Row="1"
+                Margin="0,0,0,40"
                 />
             <Image x:Name="evilCar1"
                 Source="WhiteCar.png"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Grid.Column="0"
-                Grid.Row="0"
+                
                 
                 />
             <Image x:Name="evilCar2"
@@ -25,7 +28,7 @@
                 VerticalOptions="Start"
                 HorizontalOptions="Start"
                 Grid.Column="1"
-                Grid.Row="0"
+               
                 />
         </Grid>
   </ContentView.Content>

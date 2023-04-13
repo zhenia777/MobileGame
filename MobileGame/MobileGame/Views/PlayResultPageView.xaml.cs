@@ -16,5 +16,10 @@ namespace MobileGame.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void AnimationButton1_Clicked(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

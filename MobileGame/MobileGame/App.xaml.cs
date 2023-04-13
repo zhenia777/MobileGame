@@ -23,16 +23,16 @@ namespace MobileGame
         {
             InitializeComponent();
             DeviceDisplay.KeepScreenOn = true;
-            //NavigationService.NavigateAsync(nameof(MainPageView));
+            NavigationService.NavigateAsync(nameof(MainPageView));
             NavigationService.NavigateAsync(nameof(PlayPageView));
-            //NavigationService.NavigateAsync(nameof(PlayResultPageView));
+            NavigationService.NavigateAsync(nameof(PlayResultPageView));
         }
 
         protected override void RegisterTypes(IContainerRegistry conteinerRegistry)
         {
-            conteinerRegistry.RegisterForNavigation<MainPageView, MainPageViewModel>();
-            conteinerRegistry.RegisterForNavigation<PlayPageView, PlayPageViewModel>();
-            conteinerRegistry.RegisterForNavigation<PlayResultPageView, PlayResultPageViewModel>();
+           conteinerRegistry.RegisterForNavigation<MainPageView, MainPageViewModel>();
+           conteinerRegistry.RegisterForNavigation<PlayPageView, PlayPageViewModel>();
+           conteinerRegistry.RegisterForNavigation<PlayResultPageView, PlayResultPageViewModel>();
 
         }
 

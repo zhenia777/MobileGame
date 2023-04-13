@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileGame.Views.PlayResultPageView">
+             xmlns:controls="clr-namespace:MobileGame.Controls" 
+             xmlns:viewmodels="clr-namespace:MobileGame.ViewModels" 
+             x:DataType="viewmodels:PlayResultPageViewModel"
+             x:Class="MobileGame.Views.PlayResultPageView"
+             BackgroundImageSource="ResultPage.jpg">
     <ContentPage.Content>
-        <Grid RowDefinitions="*,*,*,*,*,*,*"
-            BackgroundColor="#59CE8F">
+        <Grid RowDefinitions="150,160,250,60,90">
             <Label
                FontSize="60"
                 TextColor="#FF1E00"
@@ -14,41 +17,106 @@
                 Grid.Row="0"/>
             <Label
                 FontSize="40"
-                TextColor="#000000"
+                TextColor="#FF1E00"
                 FontAttributes="Bold"
                 Text="Your car is crashed((("
                 Grid.Row="1"/>
-            <Label
+            <Grid
+                Grid.Row="2"
+                Grid.RowSpan="2"
+                RowDefinitions="Auto, Auto, Auto"
+                ColumnDefinitions="*, *">
+                
+                <Label
                 FontSize="30"
                 TextColor="White"
                 FontAttributes="Bold"
                 Text="Score:" 
-                Grid.Row="2"/>
-             <Label
-                FontSize="20"
+                Grid.Row="0"
+                Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                />
+                <Label
+                FontSize="30"
+                TextColor="Yellow"
+                FontAttributes="Bold"
+                Text="{Binding Score} " 
+                Grid.Row="0"
+                Grid.Column="1"
+                   
+                />
+                
+                
+                <Label
+                FontSize="30"
                 TextColor="White"
                 FontAttributes="Bold"
                 Text="Best score:"
-                 Grid.Row="3"
+                Grid.Row="1"
+                Grid.Column="0"
+                    Grid.ColumnSpan="2"
                 />
-            <Label
+                <Label
+                FontSize="30"
+                TextColor="Yellow"
+                FontAttributes="Bold"
+                Text="0"
+                Grid.Row="1"
+                Grid.Column="1"
+                    
+                />
+                
+                
+                <Label
                 FontSize="30"
                 TextColor="White"
                 FontAttributes="Bold"
-                Text="Time:"
-                Grid.Row="4"
+                Text="Time: "
+                Grid.Row="2"
+                Grid.Column="0"
+                    Grid.ColumnSpan="2"
                />
-            <Button
+                <Label
+                FontSize="30"
+                TextColor="Yellow"
+                FontAttributes="Bold"
+                Text="{Binding Time}"
+                Grid.Row="2"
+                Grid.Column="1"
+                    
+               />
+            </Grid>
+            
+            
+            <controls:AnimationButton1
+                EnableAnimation="True"
                 FontSize="30"
                 Text="Menu"
+                BackgroundColor="#D8D9CF"
+                TextColor="White"
                 HorizontalOptions="Center"
-                Grid.Row="5"/>
-            <Button
+                CornerRadius="10"
+                HeightRequest="60"
+                WidthRequest="200"
+                FontAttributes="Bold"
+                Grid.Row="3"
+                Command="{Binding NavigateToPlayCommandM}"/>
+            <controls:AnimationButton1
+                EnableAnimation="True"
                 FontSize="30"
                 Text="Replay!"
+                TextColor="White"
+                BackgroundColor="#D8D9CF"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                Grid.Row="6"/>
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="60"
+                WidthRequest="200"
+                Grid.Row="4"
+                Command="{Binding NavigateToPlayCommandP}"
+                />
+           
         </Grid>
     </ContentPage.Content>
 </ContentPage>
