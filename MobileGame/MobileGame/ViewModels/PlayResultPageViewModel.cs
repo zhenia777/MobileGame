@@ -1,4 +1,6 @@
-﻿using MobileGame.Models;
+﻿using MobileGame.Domain.Entity;
+using MobileGame.Models;
+using MobileGame.Services.RepositoryService;
 using MobileGame.Views;
 using Prism.Commands;
 using Prism.Navigation;
@@ -13,9 +15,12 @@ namespace MobileGame.ViewModels
 {
     internal class PlayResultPageViewModel : ViewModelBase
     {
-        public PlayResultPageViewModel(INavigationService navigationService) : base(navigationService)
+        private readonly IRepository repository;
+        public PlayResultPageViewModel(INavigationService navigationService,
+                                       IRepository repository) 
+            : base(navigationService)
         {
-            
+            this.repository = repository;
         }
 
         private string time;
@@ -45,6 +50,10 @@ namespace MobileGame.ViewModels
             var result = parameters.GetValue<PlayResultModel>(nameof(PlayResultModel));
             Score = result.Score;
             Time = $"{result.Minutes}" + ":" +  $"{result.Seconds}";
+
+
+            repository.Add(new GameResult(result.Score, result.Seconds, result.Minutes));
+
         }
         private ICommand navigateToPlayCommandM;
         public ICommand NavigateToPlayCommandM
