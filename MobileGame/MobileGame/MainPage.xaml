@@ -8,6 +8,6 @@
                                   VerticalOptions="Center"
                                   Text="Start!"
                                   EnableAnimation="True"
-                                  Command="{Binding NavigateToPlayCommand}"/>
+                                  Command="{Binding NavigateToPlayCommandP}"/>
     </Grid>
 </ContentPage>

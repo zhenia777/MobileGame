@@ -21,11 +21,18 @@ namespace MobileGame.ViewModels
             this.pathService = pathService;
         }
 
-        private ICommand navigateToPlayCommand;
-        public ICommand NavigateToPlayCommand
+        private ICommand navigateToPlayCommandP;
+        public ICommand NavigateToPlayCommandP
         {
-            get => navigateToPlayCommand ??= new DelegateCommand(()=> 
+            get => navigateToPlayCommandP ??= new DelegateCommand(()=> 
             NavigationService.NavigateAsync(nameof(PlayPageView)));
+        }
+
+        private ICommand navigateToPlayCommandR;    
+        public ICommand NavigateToPlayCommandR
+        {
+            get => navigateToPlayCommandR ??= new DelegateCommand(() =>
+            NavigationService.NavigateAsync(nameof(GameResultPageView)));
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

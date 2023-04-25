@@ -37,7 +37,7 @@ namespace MobileGame
            conteinerRegistry.RegisterForNavigation<MainPageView, MainPageViewModel>();
            conteinerRegistry.RegisterForNavigation<PlayPageView, PlayPageViewModel>();
            conteinerRegistry.RegisterForNavigation<PlayResultPageView, PlayResultPageViewModel>();
-
+           conteinerRegistry.RegisterForNavigation<GameResultPageView, GameResultPageViewModel>();
 
             //Services
             conteinerRegistry.RegisterInstance<IPath>(Container.Resolve<AndroidDbPAth>());

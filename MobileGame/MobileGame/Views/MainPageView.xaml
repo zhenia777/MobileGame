@@ -6,7 +6,7 @@
              BackgroundImageSource="MainBackground.jpg" >
     <ContentPage.Content>
         <Grid
-            RowDefinitions="*, *, Auto,60, Auto, 100">
+            RowDefinitions="60, *, *, Auto,60, Auto, 100">
             <controls:AnimationButton Text="Play!"
                                           FontSize="50"
                                           VerticalOptions="Center"
@@ -18,8 +18,8 @@
                                           HeightRequest="90"
                                           WidthRequest="200"
                                           EnableAnimation="True"
-                                          Command="{Binding NavigateToPlayCommand}"
-                                          Grid.Row="2"/>
+                                          Command="{Binding NavigateToPlayCommandP}"
+                                          Grid.Row="3"/>
             <Label
                 Text="Magistral"
                 VerticalOptions="End"
@@ -27,7 +27,26 @@
                 TextColor="White"
                 FontAttributes="Bold,Italic"
                 FontSize="90"
-                Grid.Row="4"
+                Grid.Row="5"
+                />
+            <Button
+                VerticalOptions="Start"
+                HorizontalOptions="End"
+                HeightRequest="70"
+                WidthRequest="70"
+                Grid.Row="0"
+                ImageSource="Records.png"
+                Grid.RowSpan="2"
+                Command="{Binding NavigateToPlayCommandR}"
+                />
+            <Label
+                Text="Records" 
+                FontAttributes="Bold"
+                FontSize="19"
+                 TextColor="White"
+                HorizontalOptions="End"
+                Grid.Row="1"
+                Grid.RowSpan="2"
                 />
         </Grid>
     </ContentPage.Content>
