@@ -34,7 +34,7 @@
                 FontSize="30"
                 TextColor="Yellow"
                 FontAttributes="Bold"
-                Text="{Binding Score}"
+                Text="{Binding Result}"
                 Grid.Row="0"
                 Grid.Column="1"
                 />

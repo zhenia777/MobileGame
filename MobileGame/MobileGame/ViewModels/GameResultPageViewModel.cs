@@ -6,6 +6,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -28,12 +29,12 @@ namespace MobileGame.ViewModels
             get => time;
             set => SetProperty(ref time, value);
         }
-        private int score;
-        public int Score
-        {
-            get => score;
-            set => SetProperty(ref score, value);
-        }
+        //private int score;
+        //public int Score
+        //{
+        //    get => score;
+        //    set => SetProperty(ref score, value);
+        //}
         private int result;
         public int Result
         {
@@ -43,14 +44,15 @@ namespace MobileGame.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            base.OnNavigatedTo(parameters);
+            var theBest = repository.GetAll().OrderBy(x=> x.Score).FirstOrDefault();
+            if(theBest == null)
+            {
+                return;
+            }
 
-            var result = parameters.GetValue<PlayResultModel>(nameof(PlayResultModel));
-            Score = result.Score;
-            Time = $"{result.Minutes}" + ":" + $"{result.Seconds}";
+            Time = $"{theBest.Minutes}:{theBest.Seconds}";
+            Result = theBest.Score;
 
-
-            repository.Add(new GameResult(result.Score, result.Seconds, result.Minutes));
         }
 
         private ICommand navigateToPlayCommandM;
