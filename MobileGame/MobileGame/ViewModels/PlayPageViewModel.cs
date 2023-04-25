@@ -1,7 +1,12 @@
-﻿using Prism.Commands;
+﻿using MobileGame.Models;
+using MobileGame.Views;
+using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -14,53 +19,110 @@ namespace MobileGame.ViewModels
         public PlayPageViewModel(INavigationService navigationService)
            : base(navigationService)
         {
+            //Title = "...";
+        }
+
+        private List<LifeModel> lifeCollection;
+        public List<LifeModel> LifeCollection
+        {
+            get => lifeCollection;
+            set => SetProperty(ref lifeCollection, value);
+        }
+
+        private int life;
+        public int Life
+        {
+            get => life;
+            set => SetProperty(ref life, value);
+        }
+
+        private int score;
+        public int Score
+        {
+            get => score;
+            set => SetProperty(ref score, value);
+        }
+        private bool isGameContinue = true;
+        public bool IsGameContinue
+        {
+            get => isGameContinue;
+            set => SetProperty(ref isGameContinue, value, 
+                ()=> NavigationService.NavigateAsync(nameof(PlayResultPageView)) );
+        }
+
+
+
+        private ICommand intersectsCommand;
+        public ICommand IntersectsCommand
+        {
+            get => intersectsCommand ??= new DelegateCommand(() => {
+
+                if (LifeCollection.Count > 1)
+                {
+                    LifeCollection.Remove(LifeCollection.Last());
+                    LifeCollection = new(LifeCollection);
+                    return;
+                }
+                if(LifeCollection.Count == 1)
+                {
+                    LifeCollection.Remove(LifeCollection.Last());
+                    LifeCollection = new(LifeCollection);
+                }
+
+                IsGameContinue = false;
+            });
+        }
+
+        int seconds = 0;
+        int minutes = 0;
+        public override void Initialize(INavigationParameters parameters)
+        {
+            base.Initialize(parameters);
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                seconds++; 
+                if (seconds > 60)
+                {
+                    minutes += 1;
+                    seconds = 0;
+                }
+                Timer();
+                return IsGameContinue;
+            });
             
-            Accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
-            Accelerometer.Start(SensorSpeed.Game);
+            //Time = $"{minutes}" + ":" + $"{seconds}";
+
+            LifeCollection = new List<LifeModel> 
+            {
+                new() { ImageSource = ImageSource.FromFile("LIFE.png") },
+                new() { ImageSource = ImageSource.FromFile("LIFE.png") },
+                new() { ImageSource = ImageSource.FromFile("LIFE.png") },
+            };
+
+            Life = LifeCollection.Count;
+
         }
-
-
-        private double x;
-        public double X
+        private string time;
+        public string Time
         {
-            get => x;
-            set => SetProperty(ref x, value);
+            get => time;
+            set => SetProperty(ref time, value);
         }
-
-        private double y;
-        public double Y
+        public void Timer()
         {
-            get => y;
-            set => SetProperty(ref y, value);
+            Time = $"{minutes}" + ":" + $"{seconds}";
         }
-        private void Accelerometer_ReadingChanged(object sender, AccelerometerChangedEventArgs e)
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (e.Reading.Acceleration.X > 0.4)
-            {
-                X -= 6;
-            }
-            else if (e.Reading.Acceleration.X < -0.4)
-            {
-                X += 6;
-            }
-
-            if (e.Reading.Acceleration.Y > 0.1)
-            {
-                Y += 8;
-            }
-            else if (e.Reading.Acceleration.Y < -0.1)
-            {
-                Y -= 8;
-            }
-
+            Accelerometer.Start(SensorSpeed.Game); 
         }
-
-
         public override void OnNavigatedFrom(INavigationParameters parameters)
         {
             Accelerometer.Stop();
 
-            base.OnNavigatedFrom(parameters);
+            parameters.Add(nameof(PlayResultModel), 
+                new PlayResultModel { Minutes = minutes, Seconds = seconds, Score = score});
         }
 
     }

@@ -1,37 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:viewmodels="clr-namespace:MobileGame.ViewModels"
-             x:DataType="viewmodels:PlayPageViewModel"
+             xmlns:viewmodels="clr-namespace:MobileGame.ViewModels" 
+             xmlns:controls="clr-namespace:MobileGame.Controls"
+           
              x:Class="MobileGame.Views.PlayPageView"
              BackgroundImageSource="PlayField.jpg">
     <ContentPage.Content>
-        <Grid
-            RowDefinitions="*,*"
-            ColumnDefinitions="*,*">
+        <Grid>
+            <controls:SceneCar Score="{Binding Score}"
+                               IsGameContinue="{Binding IsGameContinue}"
+                               IntersectsCommand="{Binding IntersectsCommand}"
+                               LifeCount="{Binding Life}"/>
 
-            <Image
-                TranslationX="{Binding X}"
-                TranslationY="{Binding Y}"
-                Source="MainCar2.png"
-                Grid.Column="1"
-                Grid.Row="1"
-                />
-            <Image
-                Source="WhiteCar.png"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                Grid.Column="0"
-                Grid.Row="0"
-                
-                />
-            <Image
-                Source="WhiteCar.png"
-                VerticalOptions="Start"
+            <Label
+                FontSize="30"
+                TextColor="Red"
+                FontAttributes="Bold"
                 HorizontalOptions="Start"
-                Grid.Column="1"
-                Grid.Row="0"
-                />
+                VerticalOptions="Start"
+                Text="{Binding Time}"/>
+            <!--<Label
+                FontSize="30"
+                TextColor="White"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                Text=""
+                />-->
+            <Label
+                FontSize="30"
+                TextColor="Red"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                Text="{Binding Score}"/>
+
+            <!--<Image
+                Source="LIFE.png"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"/>-->
+
+            <ListView ItemsSource="{Binding LifeCollection}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Image Source="{Binding ImageSource}" 
+                                       HorizontalOptions="End"
+                                       VerticalOptions="End"/>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

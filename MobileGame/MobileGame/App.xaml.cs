@@ -1,8 +1,11 @@
-﻿using MobileGame.ViewModels;
+﻿using MobileGame.Services.AndroidDbPathService;
+using MobileGame.Services.RepositoryService;
+using MobileGame.ViewModels;
 using MobileGame.Views;
 using Prism;
 using Prism.Ioc;
 using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,14 +24,24 @@ namespace MobileGame
         protected override void OnInitialized()
         {
             InitializeComponent();
-            //NavigationService.NavigateAsync(nameof(MainPageView));
-            NavigationService.NavigateAsync(nameof(PlayPageView));
+
+            DeviceDisplay.KeepScreenOn = true;
+            NavigationService.NavigateAsync(nameof(MainPageView));
+            //NavigationService.NavigateAsync(nameof(PlayPageView));
+            //NavigationService.NavigateAsync(nameof(PlayResultPageView));
         }
 
         protected override void RegisterTypes(IContainerRegistry conteinerRegistry)
         {
-            conteinerRegistry.RegisterForNavigation<MainPageView, MainPageViewModel>();
-            conteinerRegistry.RegisterForNavigation<PlayPageView, PlayPageViewModel>();
+            //Navigation
+           conteinerRegistry.RegisterForNavigation<MainPageView, MainPageViewModel>();
+           conteinerRegistry.RegisterForNavigation<PlayPageView, PlayPageViewModel>();
+           conteinerRegistry.RegisterForNavigation<PlayResultPageView, PlayResultPageViewModel>();
+           conteinerRegistry.RegisterForNavigation<GameResultPageView, GameResultPageViewModel>();
+
+            //Services
+            conteinerRegistry.RegisterInstance<IPath>(Container.Resolve<AndroidDbPAth>());
+            conteinerRegistry.RegisterInstance<IRepository>(Container.Resolve<Repository>());
         }
 
     }

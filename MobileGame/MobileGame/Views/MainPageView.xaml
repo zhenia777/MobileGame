@@ -1,20 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
+             xmlns:prism="http://prismlibrary.com" xmlns:controls="clr-namespace:MobileGame.Controls"
              x:Class="MobileGame.Views.MainPageView"
              BackgroundImageSource="MainBackground.jpg" >
     <ContentPage.Content>
-        <StackLayout>
-           
-            <Grid>
-                <Button
-            Text="Play!"
-            FontSize="30"
-            CornerRadius="5"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
-            </Grid>
-        </StackLayout>
+        <Grid
+            RowDefinitions="60, *, *, Auto,60, Auto, 100">
+            <controls:AnimationButton Text="Play!"
+                                          FontSize="50"
+                                          VerticalOptions="Center"
+                                          HorizontalOptions="Center"
+                                          BackgroundColor="#D8D9CF"
+                                          TextColor="White"
+                                          FontAttributes="Bold"
+                                          CornerRadius="10"
+                                          HeightRequest="90"
+                                          WidthRequest="200"
+                                          EnableAnimation="True"
+                                          Command="{Binding NavigateToPlayCommandP}"
+                                          Grid.Row="3"/>
+            <Label
+                Text="Magistral"
+                VerticalOptions="End"
+                HorizontalOptions="Center"
+                TextColor="White"
+                FontAttributes="Bold,Italic"
+                FontSize="90"
+                Grid.Row="5"
+                />
+            <Button
+                VerticalOptions="Start"
+                HorizontalOptions="End"
+                HeightRequest="70"
+                WidthRequest="70"
+                Grid.Row="0"
+                ImageSource="Records.png"
+                Grid.RowSpan="2"
+                Command="{Binding NavigateToPlayCommandR}"
+                />
+            <Label
+                Text="Records" 
+                FontAttributes="Bold"
+                FontSize="19"
+                 TextColor="White"
+                HorizontalOptions="End"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

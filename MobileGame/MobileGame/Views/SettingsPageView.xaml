@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileGame.Views.SettingsPageView">
+    <ContentPage.Content>
+        <Grid>
+            <Label
+                 FontSize="30"
+                TextColor="White"
+                FontAttributes="Bold"
+                Text="Name player"/>
+            <Label
+                FontSize="30"
+                TextColor="White"
+                FontAttributes="Bold"
+                Text="Volume"/>
+            <Label
+                FontSize="30"
+                TextColor="White"
+                FontAttributes="Bold"
+                Text="Complexity"/>
+            <RadioButton/>
+            <RadioButton/>
+            <RadioButton/>
+            <Button
+                FontSize="30"
+                Text="Cancel"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
