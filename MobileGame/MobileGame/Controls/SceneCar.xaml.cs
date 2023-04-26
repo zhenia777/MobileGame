@@ -173,20 +173,24 @@ namespace MobileGame.Controls
 
         private void UserCarMove(double acX, double acY)
         {
-            if (acX > 0.4)
+            double w = DeviceDisplay.MainDisplayInfo.Width / DeviceDisplay.MainDisplayInfo.Density;
+            double h = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density;
+
+            if (acX > 0.4 && userCar.TranslationX > -w + userCar.Width+30)
             {
+                
                 userCar.TranslationX -= userCarSpeedX;
             }
-            else if (acX < -0.4)
+            else if (acX < -0.4 && userCar.TranslationX < w/2 -userCar.Width*2)
             {
                 userCar.TranslationX += userCarSpeedX;
             }
 
-            if (acY > 0.1)
+            if (acY > 0.1 && userCar.TranslationY != 0 )
             {
                 userCar.TranslationY += userCarSpeedY;
             }
-            else if (acY < -0.1)
+            else if (acY < -0.1 && userCar.TranslationY  >- h / 2 + userCar.Height / 2)
             {
                 userCar.TranslationY -= userCarSpeedY;
             }

@@ -21,7 +21,7 @@
                 RowDefinitions="Auto, Auto, Auto"
                 ColumnDefinitions="*, *">
 
-                <Label
+                <!--<Label
                 FontSize="30"
                 TextColor="White"
                 FontAttributes="Bold"
@@ -37,7 +37,7 @@
                 Text="{Binding Result}"
                 Grid.Row="0"
                 Grid.Column="1"
-                />
+                />-->
 
                 <Label
                 FontSize="30"
@@ -49,10 +49,10 @@
                     Grid.ColumnSpan="2"
                 />
                 <Label
+                    Text="{Binding Result}"
                 FontSize="30"
                 TextColor="Yellow"
                 FontAttributes="Bold"
-                Text="0"
                 Grid.Row="1"
                 Grid.Column="1"
                     

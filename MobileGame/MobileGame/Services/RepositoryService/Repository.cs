@@ -21,6 +21,7 @@ namespace MobileGame.Services.RepositoryService
             using (ApplicationContext db = new(path.GetDatabasePath(Constants.DATABASE_FILENAME)))
             {
                 db.GameResults.Add(gameResult);
+                db.SaveChanges();
             }
         }
 

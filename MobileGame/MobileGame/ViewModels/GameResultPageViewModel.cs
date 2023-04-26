@@ -44,7 +44,7 @@ namespace MobileGame.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            var theBest = repository.GetAll().OrderBy(x=> x.Score).FirstOrDefault();
+            var theBest = repository.GetAll().OrderByDescending(x=> x.Score).FirstOrDefault();
             if(theBest == null)
             {
                 return;
