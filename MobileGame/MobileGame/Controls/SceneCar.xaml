@@ -20,16 +20,13 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Grid.Column="0"
-                
-                
-                />
+                TranslationY="-500"/>
             <Image x:Name="evilCar2"
                 Source="WhiteCar.png"
                 VerticalOptions="Start"
                 HorizontalOptions="Start"
                 Grid.Column="1"
-               
-                />
+                TranslationY="-500"/>
         </Grid>
   </ContentView.Content>
 </ContentView>
