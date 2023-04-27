@@ -20,14 +20,7 @@
                 HorizontalOptions="Start"
                 VerticalOptions="Start"
                 Text="{Binding Time}"/>
-            <!--<Label
-                FontSize="30"
-                TextColor="White"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                VerticalOptions="Start"
-                Text=""
-                />-->
+           
             <Label
                 FontSize="30"
                 TextColor="Red"
@@ -36,10 +29,6 @@
                 VerticalOptions="Start"
                 Text="{Binding Score}"/>
 
-            <!--<Image
-                Source="LIFE.png"
-                HorizontalOptions="Center"
-                VerticalOptions="Start"/>-->
 
             <ListView ItemsSource="{Binding LifeCollection}">
                 <ListView.ItemTemplate>

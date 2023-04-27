@@ -17,8 +17,8 @@ namespace MobileGame.Controls
 	public partial class SceneCar : ContentView
 	{
         private List<VisualElement> elements;
-        private double userCarSpeedX = 8;
-        private double userCarSpeedY = 8;
+        private double userCarSpeedX = 12;
+        private double userCarSpeedY = 4;
 
         //private double npcCarSpeedY = 2;
         private readonly double S;
@@ -45,7 +45,7 @@ namespace MobileGame.Controls
             };
             Accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
             S = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density;
-            T = 3000;
+            T = 4000;
             V = S / T;
 
             random = new Random();
@@ -68,8 +68,8 @@ namespace MobileGame.Controls
 
             activeEvilCar.TranslationY = outStep;
             activeEvilCar.TranslationX = random.Next(-30, 30);
-            activeEvilCar.TranslateTo(activeEvilCar.TranslationX, S, (uint)(T-outStep));
-            Score = (score +=10);
+            activeEvilCar.TranslateTo(activeEvilCar.TranslationX, S, (uint)(T-outStep - score));
+            Score = (score +=50);
             
             return IsGameContinue;
         }
@@ -119,7 +119,7 @@ namespace MobileGame.Controls
             }
 
             UserCarMove(e.Reading.Acceleration.X, e.Reading.Acceleration.Y);
-            //TODO: Додати властивості чутливості сенсору
+          
 
         }
         

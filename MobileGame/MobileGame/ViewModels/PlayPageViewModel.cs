@@ -90,7 +90,6 @@ namespace MobileGame.ViewModels
                 return IsGameContinue;
             });
             
-            //Time = $"{minutes}" + ":" + $"{seconds}";
 
             LifeCollection = new List<LifeModel> 
             {

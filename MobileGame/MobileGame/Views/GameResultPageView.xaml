@@ -21,23 +21,7 @@
                 RowDefinitions="Auto, Auto, Auto"
                 ColumnDefinitions="*, *">
 
-                <!--<Label
-                FontSize="30"
-                TextColor="White"
-                FontAttributes="Bold"
-                Text="Score:" 
-                Grid.Row="0"
-                Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                />
-                <Label
-                FontSize="30"
-                TextColor="Yellow"
-                FontAttributes="Bold"
-                Text="{Binding Result}"
-                Grid.Row="0"
-                Grid.Column="1"
-                />-->
+  
 
                 <Label
                 FontSize="30"

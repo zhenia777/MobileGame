@@ -47,25 +47,6 @@
                 />
                 
                 
-                <Label
-                FontSize="30"
-                TextColor="White"
-                FontAttributes="Bold"
-                Text="Best score:"
-                Grid.Row="1"
-                Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                />
-                <Label
-                FontSize="30"
-                TextColor="Yellow"
-                FontAttributes="Bold"
-                Text="0"
-                Grid.Row="1"
-                Grid.Column="1"
-                    
-                />
-                
                 
                 <Label
                 FontSize="30"

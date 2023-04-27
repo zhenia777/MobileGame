@@ -29,12 +29,7 @@ namespace MobileGame.ViewModels
             get => time;
             set => SetProperty(ref time, value);
         }
-        //private int score;
-        //public int Score
-        //{
-        //    get => score;
-        //    set => SetProperty(ref score, value);
-        //}
+       
         private int result;
         public int Result
         {
